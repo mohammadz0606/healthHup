@@ -1,0 +1,406 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+
+
+
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h5 class="d-inline-block text-white text-uppercase border-bottom border-5" style="border-color: rgba(256, 256, 256, .3) !important;">Welcome To HealHub</h5>
+                <h1 class="display-1 text-white mb-md-4">Best Healthcare Solution In Your City</h1>
+                <div class="pt-2">
+                    <a href="/doctors" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Find Doctor</a>
+                    <a href="/appointment" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="https://res.cloudinary.com/dybct1px0/image/upload/v1715408310/healhub-webiste-images/about_g20oxk.jpg" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="mb-4">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
+                    <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
+                </div>
+                <p>
+                    Welcome to our exceptional hospital, where excellence in healthcare meets compassionate service.
+                     At our facility, we prioritize patient well-being above all else, providing top-notch medical care tailored to individual needs.
+                      Our team of highly skilled physicians, nurses, and staff are dedicated to delivering the highest standards of treatment,
+                       ensuring your comfort and safety throughout your journey with us. Trust in us for your medical needs,
+                     and experience the difference firsthand at our esteemed hospital.</p>
+                <div class="row g-3 pt-3">
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
+                            <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
+                            <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
+                            <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-solid fa-tablets text-primary mb-3"></i>
+                            <h6 class="mb-0">All<small class="d-block text-primary">Drugs</small></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Services Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Services</h5>
+            <h1 class="display-4">Excellent Medical Services</h1>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="service-icon mb-4">
+                        <i class="fas fa-2x fa-first-aid text-white"></i>
+                    </div>
+                    <h4 class="mb-3">First Aid</h4>
+                    <p class="m-0" style="height: 100px;">We provide a variety of guidelines and guidance to provide immediate and effective care in emergency situations.</p>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="first-aid">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fa-solid fa-calendar-check text-white"></i>
+                    </div>
+                    <h4 class="mb-3">Appointment</h4>
+                    <p class="m-0"  style="height: 100px;">It allows patients to schedule a doctor's visit online, providing them with convenience.</p>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="/appointment">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fa-solid fa-comments text-white"></i>
+                    </div>
+                    <h4 class="mb-3">Feedback</h4>
+                    <p class="m-0"  style="height: 100px;">Patient experience and opinions about medical care to help you choose the right doctor</p>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="/about">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Services End -->
+
+
+
+   <!-- Team Start -->
+   <div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Our Doctors</h5>
+            <h1 class="display-4">Qualified Healthcare Professionals</h1>
+        </div>
+        <div class="row">
+            <%
+            // Calculate average ratings and add to the doctor objects
+            doctors.forEach((doctor) => {
+                var totalStars = 0;
+                doctor.reviews.forEach((r) => {
+                    totalStars += r.stars;
+                });
+                doctor.avgRating = Math.round(totalStars / doctor.reviews.length);
+            });
+        
+            // Sort doctors by average rating in descending order
+            <!-- doctors.; -->
+        
+            // Render sorted doctors
+            doctors.sort((a, b) => b.reviews?.length - a.reviews?.length).forEach((doctor, index) => { %>
+                <% if(index < 4) { %>
+                    <div class="col-6 team-item">
+                        <div class="row g-0 bg-light rounded overflow-hidden">
+                            <div class="col-12 col-sm-5 h-100">
+                                <img class="img-fluid h-100" src="<%= doctor.picture %>" style="object-fit: cover;">
+                            </div>
+                            <div class="col-12 col-sm-7 h-100 d-flex flex-column">
+                                <div class="mt-auto p-4">
+                                    <h3><%= doctor.name %></h3>
+                                    <h6 class="fw-normal fst-italic text-primary mb-4"><%= doctor.jobTitle %></h6>
+                                    <p class="m-0"><%= doctor.description %></p>
+                                </div>
+                                <style>
+                                    .rating {
+                                        color: #ccc !important;
+                                    }
+                                    .ratingActive {
+                                        color: rgb(62, 50, 127) !important;
+                                    }
+                                </style>
+                                <div class="d-flex mt-auto border-top p-4">
+                                    <% if (doctor.avgRating) { %>
+                                        <div class="ratingActive">
+                                            <% for (var i = 0; i < doctor.avgRating; i++) { %>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                            <% } %>
+                                            <% for (var i = 0; i < 5 - doctor.avgRating; i++) { %>
+                                                <svg xmlns="http://www.w3.org/2000/svg" style="color: #ccc;" width="30" height="30" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                            <% } %>
+                                        </div>
+                                    <% } else { %>
+                                        <div class="rating">
+                                            <% for (var i = 0; i < 5; i++) { %>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                            <% } %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                
+            <% }) %>
+        </div>
+        
+        <!-- <div class="row">
+            <% doctors.forEach((doctor) => { %>
+                <%
+                var totalStars = 0;
+                doctor.reviews.forEach((r) => {
+                    totalStars += r.stars;
+                });
+                var avg = Math.round(totalStars / doctor.reviews.length);
+                %>
+                
+                
+                <div class="col-6 team-item">
+                    <div class="row g-0 bg-light rounded overflow-hidden">
+                        <div class="col-12 col-sm-5 h-100">
+                            <img class="img-fluid h-100" src="<%= doctor.picture %>" style="object-fit: cover;">
+                        </div>
+                        <div class="col-12 col-sm-7 h-100 d-flex flex-column">
+                            <div class="mt-auto p-4">
+                                <h3><%= doctor.name %></h3>
+                                <h6 class="fw-normal fst-italic text-primary mb-4"><%= doctor.jobTitle %></h6>
+                                <p class="m-0"><%= doctor.description %></p>
+                            </div>
+                            <style>
+                               .rating  {
+                                   
+                                    color: #ccc !important;
+                                  
+                                }
+                                .ratingActive  {
+                                   
+                                   color: rgb(62, 50, 127) !important;
+                                 
+                               }
+                            </style>
+                            <div class="d-flex mt-auto border-top p-4">
+                                
+                                    <% if(avg) { %>
+                                        <div class="ratingActive">
+                                            
+                                            <% for(var i=0; i < avg ; i++) { %>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                  </svg>
+                                            <% } %>
+                                            <% for(var i=0; i < 5 - avg ; i++) { %>
+                                                <svg xmlns="http://www.w3.org/2000/svg" style="color: #ccc;" width="30" height="30" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                  </svg>
+                                            <% } %>
+                                        </div>
+                                       
+                                    <% } else { %>
+                                        <div class="rating">
+                                        <% for(var i=0; i<5 ; i++) { %>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                              </svg>
+                                        <% } %>
+                                        </div>
+                                    <% } %>
+                                    
+                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            
+        </div> -->
+    </div>
+</div>
+<!-- Team End -->
+
+
+<!-- Search Start -->
+<div class="container-fluid bg-primary my-5 py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+            <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Find A Doctor</h5>
+            <h1 class="display-4 mb-4">Find A Healthcare Professionals</h1>
+            <h5 class="text-white fw-normal">
+                Whether you're looking for a family doctor or a specialist. We're here to help you find the care you deserve.</h5>
+        </div>
+        <div class="mx-auto" style="width: 100%; max-width: 600px;">
+            <form action="/" method="get" class="input-group">
+                <select class="form-select border-primary w-25" required name="department" style="height: 60px;">
+                    <option selected hidden value="">Department</option>
+                    <% departments.forEach((department) => { %>
+                        <option value="<%= department._id %>"><%= department.name %></option>
+                    <% }) %>
+                </select>
+                <input type="text" class="form-control border-primary w-50" name="doctorname" required placeholder="Doctor Name">
+                <button class="btn btn-dark border-0 w-25">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Search End -->
+
+<!-- Testimonial Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Testimonial</h5>
+            <h1 class="display-4">Patients Say About Our Services</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="owl-carousel testimonial-carousel">
+                    
+                    <% reviews.forEach((review) => { %>
+                        <div class="testimonial-item text-center mt-5">
+                            <div class="position-relative mb-5">
+                                <% if(review.author.id.picture.length == 0) { %>
+                                   
+                                    <img class=" rounded-circle mx-auto" width="200" height="200" src=" https://res.cloudinary.com/dybct1px0/image/upload/v1715209327/healhub-webiste-images/healhubLogo_kyndda.png" alt="">
+
+                                <% } else { %>
+                                    <img class=" rounded-circle mx-auto" width="200" height="200" src="<%= review.author.id.picture %>" alt="">
+                                <% } %>
+                                <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle" style="width: 60px; height: 60px;">
+                                    <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="fs-4 fw-normal"><%= review.comment %></p>
+                            <hr class="w-25 mx-auto">
+                            <h3><%= review.author.id.name %></h3>
+                            <!-- <h6 class="fw-normal text-primary mb-3">Profession</h6> -->
+                        </div>
+                    <% }) %>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Testimonial End -->
+    
+
+
+
+    <% if(filterDoctors) { %>
+        <script>
+            $(document).ready(() => {
+                $('#exampleModal').modal('show');
+            })
+        </script>
+        <!-- Modal -->
+<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Search Results</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <% if(filterDoctors.length == 0) { %>
+                    <p class="lead">No Results Found!!!</p>
+                <% } else { %>
+                    <% filterDoctors.forEach((doctor) => { %>
+                        <div class="team-item">
+                       
+                            <div class="row g-0 bg-light rounded overflow-hidden">
+                                
+                                <div class="col-12 col-sm-5 h-100">
+                                    <img class="img-fluid h-100" src="<%= doctor.picture %>" style="object-fit: cover;">
+                                </div>
+                                <div class="col-12 col-sm-7 h-100  d-flex flex-column justify-content-between">
+                                    <div class=" p-4">
+                                        <h3><%= doctor.name %></h3>
+                                        <h6 class="fw-normal fst-italic text-primary mb-4"><%= doctor.jobTitle %></h6>
+                                        <p class="m-0" style="color: #848E9F;"><%= doctor.description %></p>
+                                    </div>
+                                    
+                                
+                                
+                               
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } %>
+                
+            </div>
+           
+        </div>
+        <div class="modal-footer">
+          <a href="/"  class="btn btn-secondary" >Close</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+       
+    <% } %>
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

@@ -1,0 +1,318 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+
+<style>
+    .card {
+        width: 330px;
+        height: 400px;
+        perspective: 1000px;
+        border: 0px;
+      }
+      
+      .card-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s;
+      }
+      
+      .card:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+      
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+      }
+      
+      .card-front {
+        background:linear-gradient(45deg, #2d6fae, #24b4ed, #5567d1) ;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 0px  ;
+        border-radius: 10px;
+        justify-content: flex-start;
+        font-size: 13px;
+        transform: rotateY(0deg);
+        padding-inline: 5px;
+    
+      }
+      
+      .card-back {
+        background:linear-gradient(45deg, #2d6fae, #24b4ed, #5567d1) ;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-inline:5px;
+        border-radius: 10px;
+        justify-content: center;
+        font-size: 13px;
+        transform: rotateY(180deg);
+     
+      }
+      div .col-md-4{
+        display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+      }
+      .img-card{
+        width: -webkit-fill-available;
+    border-radius: 10px;
+    padding-bottom: 40px;
+    padding-top: 5px;
+      }
+    </style>
+
+
+
+
+   <!-- About Start -->
+   <div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="https://res.cloudinary.com/dybct1px0/image/upload/v1717592931/healhub-webiste-images/first-aid-training_m11jjn.jpg" style="object-fit: scale-down;">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="mb-4">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">First Aid</h5>
+                </div>
+                <h1 class="mt-5 mb-4">First Aid Procedures</h1>
+                <ul class="first-aid-list">
+                    <li>
+                        <h4>Ensure Safety</h4>
+                        <p>Check for any danger to yourself and the victim before administering first aid.</p>
+                    </li>
+                    <li>
+                        <h4>Contact Emergency Medical Services</h4>
+                        <p>If the situation is critical, call professional paramedics immediately.</p>
+                    </li>
+                    <li>
+                        <h4>Provide Basic First Aid</h4>
+                        <p>Support breathing, place the person in a comfortable position, stop bleeding, and provide care for minor burns and fractures.</p>
+                    </li>
+                    <li>
+                        <h4>Respond According to the Situation</h4>
+                        <p>Some cases may require immediate intervention, such as performing CPR in cases of cardiac arrest.</p>
+                    </li>
+                    <li>
+                        <h4>Stay Calm and Provide Emotional Support</h4>
+                        <p>Remaining calm and providing reassurance can be helpful for a person experiencing distress.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5"></h5>
+                <h1 class="display-4">Specific Guidelines for Each First Aid Procedure:</h1>    
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="row row-cols-1 row-cols-md-2 g-4" >
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715407283/healhub-webiste-images/first-aid-1_wdrvqb.jpg" class="img-card">
+                                        <h6>Tongue Swallowing First Aid due to Loss of Consciousness</h6>
+                                        <p>
+                                            The goal of performing tongue swallowing first aid is to open the airway with minimal movement of the cervical spine. Tongue swallowing first aid should be performed by trained rescuers when there is suspicion of spinal cord injury because moving or lifting the chin may cause movement of the cervical spine, leading to further damage.
+                                        </p>
+                                    </div>
+                                    <div class="card-back">
+                                        <h6>Here are the steps for tongue swallowing first aid using the chin lift maneuver:</h6>
+                                        <p>Kneel behind the victim's head, and support the victim's head while aligning the head, neck, and spine.</p>
+                                        <p>Place your hands on the sides of the face with your fingertips on the angle of the lower jaw.</p>
+                                        <p>Gently lift the jaw to open the airway, being careful not to tilt the neck, as jaw movement moves the tongue forward in the mouth, opening the airway.</p>
+                                        <p>Do not place your fingers in the victim's mouth trying to push the jaw to open the airway.</p>
+                                        <p>Call emergency services and request assistance as soon as possible.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715407281/healhub-webiste-images/first-aid-2_vhc3aa.jpg" class="img-card">
+                                        <h6>First Aid for Fainting</h6>
+                                        <p>
+                                            Fainting is a temporary loss of consciousness that occurs when blood flow to the brain decreases. Although this loss of consciousness is often brief, it should be treated as a medical emergency until the signs and symptoms disappear and the cause is determined. What are the first aid measures for fainting?
+                                        </p>
+                                    </div>
+                                    <div class="card-back">
+                                        <h6>First aid for a person who has fainted</h6>
+                                        <p>Help the person lie on their back if the person is sitting on a chair.</p>
+                                        <p>Roll the person onto their side if they faint, and make sure they are breathing and have regular heartbeats.</p>
+                                        <p>Elevate the person's legs above the level of the heart by about 30 cm if possible to restore blood flow to the brain.</p>
+                                        <p>Undo collars, belts, and other tight clothing if the fainting spell is due to heat.</p>
+                                        <p>Make sure there is plenty of fresh air and ask others to move away and open the window if the person is in a room.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+            
+                        
+                        
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-inner">
+                                  <div class="card-front">
+                                    <img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715407281/healhub-webiste-images/first-aid-3_xgpag9.jpg" class="img-card">
+                                    <h6>First Aid for Choking</h6>
+                                    <p>
+                                        Choking occurs when someone's airway suddenly closes, making it difficult for them to breathe. The airway can be partially or completely blocked.
+                        
+                                        In adults, choking usually occurs due to food becoming lodged, while in children and infants, choking can occur if a child puts a small object in their mouth and accidentally swallows it, causing it to become stuck in their airways.
+                                    </p>
+                                  </div>
+                                  <div class="card-back">
+                                    <h6>First Aid for Acute Choking in Adults and Children Over One Year Old:</h6>
+                        
+                                       <p>Stand gently behind the person on one side. If you are using your right hand, stand to their left, and if you are using your left hand, stand to their right.</p>
+                                        
+                                       <p>
+                                        Support the person's chest with one hand, then tilt the choking person forward to remove the obstruction from their mouth, rather than further down.
+                                        </p>
+                                        <p>
+                                            Hit the person with five sharp blows between their shoulder blades using the heel of your hand.</p>
+                        
+                                            <p>If it has not cleared, press on the abdomen several times, up to five presses.
+                        
+                                                <p>
+                                                    Stop after each press to see if the obstruction has cleared.
+                                                </p>                                  
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-inner">
+                                  <div class="card-front">
+                                    <img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715407280/healhub-webiste-images/first-aid-4_rzdrbd.jpg" class="img-card">
+                                    <h6>First Aid for Cardiac Arrest and Respiratory Arrest</h6>
+                                    <p>
+                                        It is a severe emergency condition characterized by loss of consciousness, cessation of breathing, and pulse due to interruption of blood flow to vital organs. This condition requires immediate intervention to restart the heart and restore respiratory function, and can occur due to causes such as drowning accidents, electric shocks, and acute heart attacks.
+                                    </p>
+                                  </div>
+                                  <div class="card-back"><br>
+                                    <h6>First Aid for a Person Who Has Fainted</h6>
+                                    <p>Ensure the area and the injured person are safe, then immediately call emergency medical services.</p>  
+                                       
+                                            Begin cardiopulmonary resuscitation (CPR):
+                        
+                                            Place the victim on their back on a flat, hard surface.         
+                                             </p>
+                                             <p>
+                                            Place your hands in the middle of the chest and deliver compressions at a rate of about 100-120 compressions per minute.
+                                            </p>
+                                        <p>
+                                        Provide artificial respiration using mouth-to-mouth or a mechanical breathing device at a ratio of 2 breaths for every 30 compressions.</p>
+                                        <p>
+                                        Continue resuscitation until the arrival of the medical emergency team.</p>
+                                           
+                                     </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-inner">
+                                  <div class="card-front">
+                                    <img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715407280/healhub-webiste-images/first-aid-5_z4e4we.jpg" class="img-card">
+                                    <h6>First Aid for Child Resuscitation</h6>
+                                    <p>
+                                        It is a medical procedure to restart the heart and respiratory functions in children in case of respiratory or cardiac arrest. This includes providing artificial respiration and chest compressions, providing oxygen to the blood, and using artificial respiration devices if necessary.
+                        
+                                    </p>
+                                  </div>
+                                  <div class="card-back">
+                                    <h6>Cardiopulmonary resuscitation (CPR) is an essential part of pediatric resuscitation.</h6>
+                        
+                                       <p>
+                                        Ensure the safety of the area and the injured child, then
+                                            immediately call emergency medical services.
+                                        </p>
+                                        <p>
+                                            Start artificial respiration using mouth-to-mouth or a mechanical breathing device.
+                                            </p>
+                                            <p>
+                                                Provide chest compressions at a rate of about 100-120 compressions per minute.
+                                            </p>
+                        
+                                                <p>
+                                                    Continue resuscitation until the arrival of the medical emergency team.
+                                                </p>
+                                </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-inner">
+                                  <div class="card-front">
+                                    <img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715407280/healhub-webiste-images/first-aid-6_psxgut.jpg" class="img-card">
+                                    <h6>First Aid for Burn Resuscitation</h6>
+                                    <p> 
+                                        Procedures taken to provide immediate medical care to people who have suffered burns, with the aim of reducing pain, preventing infection, and speeding up the healing process. Burn resuscitation includes cooling the affected area with cold water (not ice) for 10-20 minutes to reduce inflammation and pain.
+                                    </p>
+                                  </div>
+                                  <div class="card-back">
+                                    <h6>Initial actions for burn resuscitation include:</h6>
+                        
+                                       <p>
+                                        Ensure the safety of the injured person and move them to a safe place if possible.
+                                        
+                                            Extinguish the fire or remove the potential source of the burn if it is safe.</p>
+                                            <p>
+                                                Cool the burned area with cold water for 10-20 minutes to reduce inflammation and pain.   </p>
+                        
+                                                <p>
+                                                    Continue resuscitation until the arrival of the medical emergency team.
+                                            
+                                                    Remove tight or close-fitting clothing from the burn area, but leave things that stick to the skin
+                                                </p>
+                                                <p>Cover the burned area with a clean, dry piece of cloth.
+                                                
+                                                </p>
+                                                <p>
+                                                    If the burns are severe, cover large areas, or involve the face or joints, you should contact the emergency medical team immediately.</p>
+                                </div>
+                                </div>
+                              </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

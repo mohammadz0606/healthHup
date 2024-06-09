@@ -1,0 +1,286 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+<style>
+    .container-fluid, select option {
+      color: #848E9F !important;
+    }
+    .bg-light {
+        background-color: #EFF5F9 !important;
+    }
+</style>
+<%
+
+
+
+var tests = [
+  'Boold Test',
+  'Iron Test',
+  'B12 Test',
+  'pH Test',
+  'Density Test',
+  'Flame Test',
+  'Ink Chromatography',
+  'Water Electrolysis',
+  'Vitamin C Test',
+  'Catalase Reaction',
+  'Potato Osmosis',
+  'Agar Diffusion',
+  'Baking Soda and Vinegar Reaction'
+  ]
+%>
+ <!-- Appointment Start -->
+ <div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Appointment</h5>
+                    <h1 class="display-4">Make An Appointment For Your Family</h1>
+                </div>
+                <p class="mb-5">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
+                <a class="btn btn-primary rounded-pill py-3 px-5 me-3" href="/doctors">Find Doctor</a>
+                <a class="btn btn-outline-primary rounded-pill py-3 px-5" href="/about">Read More</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-light text-center rounded p-5">
+                    <h1 class="mb-4">Book An Appointment</h1>
+                    
+                    <form action="" method="post">
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <select required id="selectedDepartment" name="department" class="form-select bg-white border-0" style="height: 55px;">
+                                    <option  value="-1" >Choose Department</option>
+                                    <% departments.forEach((department) => { %>
+                                        <option value="<%= department._id %>"><%= department.name %></option>
+                                    <% }) %>
+                                    
+                                   
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div id="doctorSelect">
+                                    <select required id="selectedDoctor" name="doctor" class="form-select bg-white border-0" style="height: 55px;">
+                                        <option value="-1">Select Doctor</option>
+
+                                       
+                                    </select>
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-12" id="labTests">
+                                <% tests.forEach((test) => { %>
+                                   
+                                    <div class="form-check" style="text-align: left !important">
+                                      <input class="form-check-input"  type="checkbox" name="labTests" value="<%= test %>" id="<%= test %>">
+                                      <label class="form-check-label" for="<%= test %>">
+                                       <%= test %>
+                                      </label>
+                                  </div>
+                                  <% }) %>
+                            </div>
+
+                            <div id="checklist" style="display: none;">
+                                
+                               <h5 style="color: rgba(210, 11, 11, 0.907);">Please do not eat for 12 hours before these tests.</h5>
+                            
+                                <input value="1" name="r" type="checkbox" id="01">
+                                <label for="01">Hemoglobin</label>
+                                <input value="2" name="r" type="checkbox" id="02">
+                                <label for="02">blood test</label>
+                                <input value="3" name="r" type="checkbox" id="03">
+                                <label for="03">Vitamin D analysis</label>
+                                <input value="1" name="r" type="checkbox" id="04">
+                                <label for="04">Hemoglobin</label>
+                                <input value="2" name="r" type="checkbox" id="05">
+                                <label for="05">blood test</label>
+                                <input value="3" name="r" type="checkbox" id="06">
+                                <label for="06">Vitamin D analysis</label>
+                             
+                            </div>
+                            <div id="doctorCost">
+                                
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <input type="text" required class="form-control bg-white border-0" name="name" value="<%= currentUser.name %>" placeholder="Your Name" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="email" required class="form-control bg-white border-0" name="email" value="<%= currentUser.username %>" placeholder="Your Email" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" required class="form-control bg-white border-0" name="age" value="<%= currentUser.age %>" placeholder="Your Age" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <select name="gender" required class="form-select bg-white border-0" style="height: 55px;">
+                                    <option selected>Gender</option>
+                                    <% if(currentUser.gender == 'male') { %>
+                                        <option value="male" selected>Male</option>
+                                        <option value="female">Female</option>
+                                    <% } else { %>
+                                        <option value="male" >Male</option>
+                                        <option value="female" selected>Female</option>
+                                    <% } %>
+                                    
+                                  
+                                </select>
+                            </div>
+                            <!-- <div class="col-12 col-sm-6">
+                                <div class="date" id="date" data-target-input="nearest">
+                                    <input type="text"
+                                        class="form-control bg-white border-0 datetimepicker-input"
+                                        placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="time" id="time" data-target-input="nearest">
+                                    <input type="text"
+                                        class="form-control bg-white border-0 datetimepicker-input"
+                                        placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">
+                                </div>
+                            </div> -->
+                            
+                            <div class="displayDatesAndTimes row"></div>
+                            
+                            <div class="col-12">
+                                <!-- medicalHistory -->
+                                
+                                    <textarea rows="5" required class="form-control bg-white border-0" name="medicalHistory" 
+                                    placeholder="Medical History: Chronic Conditions: Diabetes, Hypertension, Asthma Previous Surgeries: Appendectomy (2010), Knee replacement (2018), Gallbladder removal (2015)  Allergies: Penicillin, Shellfish, Peanuts" ></textarea>
+                                
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Make An Appointment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Appointment End -->
+<script>
+
+    $(document).ready(() => {
+    
+        $("#labTests").hide()
+    
+        $("#selectedDepartment").change((event) => {
+    
+            $.ajax({
+                url: '/api/doctors',
+                method: 'GET',
+                data: {  },
+                success: async function(response) {
+                    console.log(response)
+                    var doctors = [];
+                    response.forEach((d) => {
+                        console.log(d.department.id)
+                        if(d.department.id == $("#selectedDepartment").val()) {
+                            doctors.push(d);
+                        }
+                    })
+                    var doctorsList = '';
+                    doctors.forEach((d) => {
+                        doctorsList += `<option value="${d._id}">${d.name}</option>`
+                    })
+    
+                    var doctorSelectHTML = `
+                        <select required id="selectedDoctor" name="doctor" class="form-select bg-white border-0" style="height: 55px;">
+                            <option value="-1">Select Doctor</option>
+                            ${doctorsList}
+                        </select>
+                    `
+    
+                    $("#doctorSelect").html(doctorSelectHTML)
+    
+                    if($("#selectedDepartment").val() == '6659dbde9a7c3f3e9bd7e946') {
+                        $("#labTests").show()
+                    } else {
+                        $("#labTests").hide()
+                    }
+                }
+            })
+        })
+    
+        // Event delegation for dynamically added elements
+        $("#doctorSelect").on('change', '#selectedDoctor', (event) => {
+            console.log(event)
+            console.log($("#selectedDoctor").val())
+    
+            var displayDatesAndTimes = '';
+    
+            $.ajax({
+                url: '/api/doctors',
+                method: 'GET',
+                data: {  },
+                success: function(response) {
+                    // Update the content below with the details of the selected doctor
+    
+                    var foundDoctorObj = {};
+                    response.forEach(element => {
+                        if(element._id == $("#selectedDoctor").val()) {
+                            foundDoctorObj = element;
+                        }
+                    });
+                    console.log(foundDoctorObj)
+    
+                    // populateDate
+                    var dates = ''
+                    foundDoctorObj.availableDays.forEach((aD, index) => {
+                        dates += `
+                            <div class="form-check" style="text-align: left !important">
+                                <input class="form-check-input" required type="radio" name="date" value="${aD}" id="${foundDoctorObj._id}-${index}-${aD[0] + aD[1]}">
+                                <label class="form-check-label" for="${foundDoctorObj._id}-${index}-${aD[0] + aD[1]}">
+                                    ${aD}
+                                </label>
+                            </div>
+                        `
+                    })
+    
+                    var times = ''
+                    foundDoctorObj.availableHours.forEach((aH, index) => {
+                        times += `
+                            <div class="form-check" style="text-align: left !important">
+                                <input class="form-check-input" required type="radio" name="time" value="${aH}" id="${foundDoctorObj._id}-${index}-${aH[0] + aH[1]}">
+                                <label class="form-check-label" for="${foundDoctorObj._id}-${index}-${aH[0] + aH[1]}">
+                                    ${aH}
+                                </label>
+                            </div>
+                        `
+                    })
+    
+                    displayDatesAndTimes = `
+                        <div class="col-6 text-left">
+                            <p class="mt-3 mb-1" style="text-align: left !important; font-weight: bold">Available Days</p>
+                            ${dates}        
+                        </div>
+                        <div class="col-6 text-left">
+                            <p class="mt-3 mb-1" style="text-align: left !important; font-weight: bold">Available Hours</p>
+                            ${times}        
+                        </div>
+                    `
+                    console.log(displayDatesAndTimes)
+    
+                    $(".displayDatesAndTimes").html(displayDatesAndTimes)
+    
+                    $("#doctorCost").text("Cost of the appointment: $" + foundDoctorObj.hourlyRate)
+    
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching doctor details:', error);
+                }
+            });
+        })
+    })
+    </script>
+    
+
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

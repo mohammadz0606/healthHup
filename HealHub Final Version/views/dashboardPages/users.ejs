@@ -1,0 +1,140 @@
+
+
+<%- include("../partials/dashboard/header.ejs") %>
+
+
+<!-- partial -->
+<div class="container-fluid page-body-wrapper">
+  <!-- partial:partials/_sidebar.html -->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+      <%-include("../partials/dashboard/navList.ejs") %>
+      
+    </ul>
+  </nav>
+  <!-- partial -->
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="font-weight-bold mb-0">Users</h2>
+            
+          </div>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-between">
+            <p class="lead"><%= users.length %> Users Found</p>
+            <a href="/dashboard/manage/users" class="btn btn-light">
+                <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                  </svg>
+                Reload Users
+            </a>
+        </div>
+        <div class="col-12 mt-5">
+            <div class="row">
+                <% users.forEach((user) => { %>
+                    <div class="col-4 mx-2 bg-light p-4 mt-3" style="border-radius: 15px;">
+                        
+                        <img class="w-100 rounded-3" src="<%= user.picture %>" alt="">
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">Role</p>
+                        <% if(user.isAdmin) { %>
+                          <p class=" mb-0">Admin</p>
+                        <% } else { %>
+                          <% if(user.role == 'user') { %>
+                            <p class=" mb-0">User</p>
+                          <% } else { %>
+                            <p class=" mb-0">Doctor</p>
+                          <% }%>
+                          
+                        <% }%>
+                        <br>
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">related to Doctor</p>
+                        <p class=" mb-0"><%= user.relatedDoctor?.id?.name %></p>
+                        <br>
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">name</p>
+                        <p class=" mb-0"><%= user.name %></p>
+                        <br>
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">Email</p>
+                        <p class=" mb-0"><%= user.username %></p>
+                        <br>
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">phone Number</p>
+                        <p class=" mb-0"><%= user.phoneNumber %></p>
+                        <br>
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">Age</p>
+                        <p class=" mb-0"><%= user.age %></p>
+                        <br>
+                        <p class="mb-0" style="font-weight: bold; text-transform: uppercase;">gender</p>
+                        <p class=" mb-0"><%= user.gender %></p>
+                        
+
+                        <% if(!user.isAdmin) { %>
+                          <div class="d-flex align-items-center justify-content-end mt-4">
+                            <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#add-as-a-doctor-user-<%= user._id %>">Add as a Doctor</button>
+                                 
+                              <form class="mx-4" action="/dashboard/manage/user/<%= user._id %>?_method=DELETE" method="post">
+                                  
+                                  <button class="btn btn-danger text-white">Delete</button>
+                              </form>
+                          </div>
+                        <% } %>
+                        
+                    </div>
+                   
+                    <!-- Modal -->
+                  <div class="modal fade" id="add-as-a-doctor-user-<%= user._id %>" tabindex="-1" aria-labelledby="add-as-a-doctor-user-<%= user._id %>Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header border-0">
+                          <h1 class="modal-title fs-5" id="add-as-a-doctor-user-<%= user._id %>Label">Add as a Doctor</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="/dashboard/manage/user/<%= user._id %>/add-as-a-doctor" method="post">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Select Doctor</label>
+                                <select class="form-select" required name="doctor" aria-label="Default select example">
+                                  <option selected disabled value="-1">Choose Doctor</option>
+                                  <% doctors.forEach((doctor) => { %>
+                                    <option value="<%= doctor._id %>"><%= doctor.name %></option>
+                                  <% }) %>
+                                  
+                                </select>
+                            </div>
+                           
+                          
+                              
+                            <button class="btn btn-primary text-white px-5">Save</button>
+                          </form>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+                
+                
+            </div>
+        </div>
+     </div>
+    </div>
+    
+      
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    
+    <!-- partial -->
+  
+  <!-- main-panel ends -->
+</div>
+
+
+
+  
+<%- include("../partials/dashboard/footer.ejs") %>
+
+
+

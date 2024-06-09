@@ -1,0 +1,394 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+
+<style>
+  
+
+
+
+.Sendbtn{
+  font-family: inherit;
+  font-size: 20px;
+  background: royalblue;
+  color: white;
+  padding: 0.5em 0.8em;
+  padding-left: 0.9em;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.Sendbtn span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.Sendbtn svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.Sendbtn:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.Sendbtn:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.Sendbtn:hover span {
+  transform: translateX(5em);
+}
+
+.Sendbtn:active {
+  transform: scale(0.95);
+}
+.Closebtn{
+  font-family: inherit;
+  font-size: 20px;
+  background: RED;
+  color: white;
+  padding: 0.5em 0.8em;
+  padding-left: 0.9em;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.Closebtn span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.Closebtn svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.Closebtn:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.Closebtn:hover svg {
+  transform: translateX(1.2em)  scale(1.1);
+}
+
+.Closebtn:hover span {
+  transform: translateX(5em);
+}
+
+.Closebtn:active {
+  transform: scale(0.95);
+}
+
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+#feedbackButton{
+    width: 200px;
+}
+#otherButton{
+    width: 200px;
+}
+
+@media (max-width:600px){
+
+  
+}
+</style>
+
+<%
+function calculateAverageRating(reviews) {
+    if (reviews.length === 0) {
+        return 0; // Return 0 if there are no reviews
+    }
+
+    // Calculate total stars
+    const totalStars = reviews.reduce((acc, review) => acc + review.stars, 0);
+
+    // Calculate average rating
+    const averageRating = totalStars / reviews.length;
+
+    return averageRating;
+}
+%>
+
+  <!-- Search Start -->
+  <div class="container-fluid pt-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+            
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Find A Doctor</h5>
+            <h1 class="display-4 mb-4">Find A Healthcare Professionals</h1>
+            <!-- <h5 class="fw-normal">Scheduling an appointment at our website is quick and easy through our user-friendly online booking system. Simply visit our appointment page, select your preferred date and time, and choose the specialist or service you need. Our secure platform ensures your personal information is protected, and you’ll receive an immediate confirmation of your appointment. Experience hassle-free healthcare with just a few clicks!</h5> -->
+        </div>
+        <div class="mx-auto" style="width: 100%; max-width: 600px;">
+            <form class="input-group" action="/doctors" method="get">
+                <select class="form-select border-primary w-25" required name="department" style="height: 60px;">
+                    <option selected hidden value="">Department</option>
+                    <% departments.forEach((department) => { %>
+                        <option value="<%= department._id %>"><%= department.name %></option>
+                    <% }) %>
+                </select>
+                <input type="text" class="form-control border-primary w-50" required name="doctorname" placeholder="Doctor Name">
+                <button class="btn btn-dark border-0 w-25">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Search End -->
+
+    <!-- Team Start -->
+    <div class="container-fluid" >
+        <div class="container1">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px; padding-top: 50px;">
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Our Doctors</h5>
+            </div>
+
+            <% departmentsListWithDoctors.forEach((departmentWithDoctors) => { %>
+                <div class="text-center mx-auto my-5" style="max-width: 500px;">
+            
+                    <h1 class="display-4"><%= departmentWithDoctors.name %></h1>
+                </div>
+                <div class="container" style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    
+                    <% if(departmentWithDoctors.listOfDoctors.length == 0) { %>
+                        <div class="text-center w-100">
+                            <p class="lead text-center" style="color: lightGray;">Currently, there are no doctors associated with this department.</p>
+
+                        </div>
+                    <% } else { %>
+                        <% departmentWithDoctors.listOfDoctors.forEach((doctor) => { %>
+                            <div class="team-item">
+                           
+                                <div class="row g-0 bg-light rounded overflow-hidden">
+                                    
+                                    <div class="col-12 col-sm-5 h-100">
+                                        <img class="img-fluid h-100" src="<%= doctor.picture %>" style="object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-sm-7 h-100  d-flex flex-column justify-content-between">
+                                        <div class=" p-4">
+                                            <h3><%= doctor.name %></h3>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4"><%= doctor.jobTitle %></h6>
+                                            <p class="m-0" style="color: #848E9F;"><%= doctor.description %></p>
+                                        </div>
+                                        
+                                    <div style=" display: flex; padding: 10px; ">  
+                                        <button data-bs-toggle="modal" data-bs-target="#new-feedback-<%= doctor._id %>" class="btn btn-primary" style="margin-inline: 5px;">Send Feedback</button>
+                                        <button  class="btn btn-dark" style="margin-inline: 5px;" data-bs-toggle="modal" data-bs-target="#show-feedbacks-<%= doctor._id %>">Review Feedbacks</button>
+                                    </div>
+                                    <div class="modal modal-lg fade" id="new-feedback-<%= doctor._id %>" tabindex="-1" aria-labelledby="new-feedback-<%= doctor._id %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-0">
+                                            <h1 class="modal-title fs-5" id="new-feedback-<%= doctor._id %>Label"></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body border-0">
+                                                <% if(currentUser) { %>
+                                                    
+                                                    <form action="/add/review/doctor/<%= doctor._id %>" method="post">      
+                                                        <div class="bg-white border border-slate-200 grid grid-cols-6 gap-2 rounded-xl p-2 text-sm">
+                                                            
+                                                            <h3>Send Feedback to Dr. <%= doctor.name %></h3>
+                                                            <div class="d-flex mt-auto border-top p-4">
+                                                                <div class="rating">
+                                                                    <input value="5" name="stars" id="star5<%= doctor._id %>" type="radio">
+                                                                    <label for="star5<%= doctor._id %>"></label>
+                                                                    <input value="4" name="stars" id="star4<%= doctor._id %>" type="radio">
+                                                                    <label for="star4<%= doctor._id %>"></label>
+                                                                    <input value="3" name="stars" id="star3<%= doctor._id %>" type="radio">
+                                                                    <label for="star3<%= doctor._id %>"></label>
+                                                                    <input value="2" name="stars" id="star2<%= doctor._id %>" type="radio">
+                                                                    <label for="star2<%= doctor._id %>"></label>
+                                                                    <input value="1" name="stars" id="star1<%= doctor._id %>" type="radio">
+                                                                    <label for="star1<%= doctor._id %>"></label>
+                                                                </div>
+                                                            </div>
+                                                            <textarea name="comment" style="width: -webkit-fill-available;height: 75px;" placeholder="Your feedback..." class="bg-slate-100 text-slate-600 h-28 placeholder:text-slate-600 placeholder:opacity-50 border border-slate-200 col-span-6 resize-none outline-none rounded-lg p-2 duration-300 focus:border-slate-600"></textarea>
+                                                    
+                                                    
+                                                            <span class="col-span-2"></span>
+                                                        
+                                                        
+                                                        </div>
+                                                        <div style="display: flex; align-items: baseline; justify-content: flex-end;">
+                                                        <button class="Sendbtn" type="submit">
+                                                            <div class="svg-wrapper-1">
+                                                            <div class="svg-wrapper">
+                                                                <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24"
+                                                                width="24"
+                                                                height="24">
+                                                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                                                <path
+                                                                    fill="currentColor"
+                                                                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                                                ></path>
+                                                                </svg>
+                                                            </div>
+                                                            </div>
+                                                            <span>Send</span>
+                                                        </button>
+                                                        
+                                                        </div>
+                                                    </form>
+                                                <% } else { %>
+                                                    <p class="lead">You must login to add doctor feedback</p>
+                                                    <a class="btn btn-primary px-5" href="/login">Login</a>
+                                                <% } %>
+                                                
+
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal modal-lg fade" id="show-feedbacks-<%= doctor._id %>" tabindex="-1" aria-labelledby="show-feedbacks-<%= doctor._id %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-0">
+                                            <h1 class="modal-title fs-5" id="show-feedbacks-<%= doctor._id %>Label"></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body border-0">
+                                                <div id="otherDiv" class="hidden">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h3>Doctor Feedbacks</h3>
+                                                        <h3 class="mx-5">Rating <%= calculateAverageRating(doctor.reviews) %> (<%= doctor.reviews.length %> Reviews)</h3>
+                                                    </div>
+                                                    
+                                                    <hr>
+                                                    <% doctor.reviews.forEach((review) => { %>
+                                                        <div>
+                                                            <div class="d-flex align-items-center">
+                                                                <h5 class="mb-0" style="text-transform: capitalize;"><%= review.author.id.name %></h5>
+                                                                <p class="mb-0 mx-5"><%= review.stars %> stars</p>
+                                                            </div>
+                                                            
+                                                            <p><%= review.comment %></p>
+                                                        </div>
+                                                    <% }) %>
+                                                    <div class="d-flex justify-content-end align-items-center">
+                                                        <button class="Closebtn" data-bs-dismiss="modal" aria-label="Close">close</button>
+                                                    </div>
+
+                                                    
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                    
+                    
+    
+    
+    
+                    
+                </div>
+            <% }) %>
+            
+
+            
+            
+
+
+               
+            </div>
+        </div>
+    </div>
+       
+
+
+    <% if(filterDoctors) { %>
+        <script>
+            $(document).ready(() => {
+                $('#exampleModal').modal('show');
+            })
+        </script>
+        <!-- Modal -->
+<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Search Results</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <% if(filterDoctors.length == 0) { %>
+                    <p class="lead">No Results Found!!!</p>
+                <% } else { %>
+                    <% filterDoctors.forEach((doctor) => { %>
+                        <div class="team-item">
+                       
+                            <div class="row g-0 bg-light rounded overflow-hidden">
+                                
+                                <div class="col-12 col-sm-5 h-100">
+                                    <img class="img-fluid h-100" src="<%= doctor.picture %>" style="object-fit: cover;">
+                                </div>
+                                <div class="col-12 col-sm-7 h-100  d-flex flex-column justify-content-between">
+                                    <div class=" p-4">
+                                        <h3><%= doctor.name %></h3>
+                                        <h6 class="fw-normal fst-italic text-primary mb-4"><%= doctor.jobTitle %></h6>
+                                        <p class="m-0" style="color: #848E9F;"><%= doctor.description %></p>
+                                    </div>
+                                    
+                                
+                                
+                               
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } %>
+                
+            </div>
+           
+        </div>
+        <div class="modal-footer">
+          <a href="/doctors"  class="btn btn-secondary" >Close</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+       
+    <% } %>
+
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

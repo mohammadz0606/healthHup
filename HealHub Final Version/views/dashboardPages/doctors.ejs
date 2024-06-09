@@ -1,0 +1,297 @@
+
+
+<%- include("../partials/dashboard/header.ejs") %>
+
+
+<!-- partial -->
+<div class="container-fluid page-body-wrapper">
+  <!-- partial:partials/_sidebar.html -->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+      <%-include("../partials/dashboard/navList.ejs") %>
+      
+    </ul>
+  </nav>
+  <!-- partial -->
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="font-weight-bold mb-0">Doctors</h2>
+            <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#new-doctor">Add New Doctor</button>
+          </div>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-between">
+            <p class="lead"><%= doctors.length %> Doctors Found</p>
+            <a href="/dashboard/manage/doctors" class="btn btn-light">
+                <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                  </svg>
+                Reload Doctors
+            </a>
+        </div>
+        
+        <div class="col-12 mt-5">
+            <div class="row">
+                <% doctors.forEach((doctor) => { %>
+                    <div class="col-4 mx-2 bg-light p-4 mt-3" style="border-radius: 15px;">
+                      <div class="d-flex justify-content-between">
+                        <span class="badge bg-primary mb-3 rounded-3"><%= doctor?.department?.id?.name %></span>
+                        <% if(doctor.visable) { %>
+                          <span class="badge bg-success mb-3 rounded-3">Visable</span>
+                        <% } else { %>
+                          <span class="badge bg-danger mb-3 rounded-3">Hidden</span>
+                        <% } %>
+                       
+                      </div>
+                     
+
+                      <img class="w-100 rounded-3" src="<%= doctor.picture %>" alt="">
+                        <h3 class="h3 mb-0 mt-3"><%= doctor.name %></h3>
+                        <span class=" mb-0 mt-2" style="text-transform: uppercase;"><%= doctor.jobTitle %></span>
+                        <p class=" mb-0 mt-4"><%= doctor.description %></p>
+                        <hr>
+                       
+                        <div class="row">
+                          <div class="col-6">
+                            <p style="font-weight: bold">Experience</p>
+                            <p style="font-size: 0.8em"><%= doctor.experience %></p>
+                          </div>
+                          <div class="col-6">
+                            <p style="font-weight: bold">Hourly Rate</p>
+                            <p style="font-size: 0.8em"><%= doctor.hourlyRate %></p>
+                          </div>
+                          <div class="col-6">
+                            <p style="font-weight: bold">English Level</p>
+                            <p style="font-size: 0.8em"><%= doctor.englishLevel %></p>
+                          </div>
+                          <div class="col-6">
+                            <p style="font-weight: bold">Availability</p>
+                            <p style="font-size: 0.8em"><%= doctor.availability %></p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-6">
+                            <p style="font-weight: bold">Available Days</p>
+                            <% doctor.availableDays.forEach((aD) => { %>
+                              <p style="font-size: 0.8em"><%= aD %></p>
+                            <% }) %>
+                          </div>
+                          <div class="col-6">
+                            <p style="font-weight: bold">Available Hours</p>
+                            <% doctor.availableHours.forEach((aH) => { %>
+                              <p style="font-size: 0.8em"><%= aH %></p>
+                            <% }) %>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            
+                                <button class="btn btn-warning text-white"  data-bs-toggle="modal" data-bs-target="#edit-doctor-<%= doctor._id %>">Edit</button>
+                            
+                            <form class="mx-4" action="/dashboard/manage/doctor/<%= doctor._id %>?_method=DELETE" method="post">
+                                
+                                <button class="btn btn-danger text-white">Delete</button>
+                            </form>
+                            <a href="/dashboard/manage/doctor/<%= doctor._id %>/toggle-visablility" class="btn btn-success">Change Visability</a>
+                        </div>
+                    </div>
+                    
+                    <div class="modal fade" id="edit-doctor-<%= doctor._id %>" tabindex="-1" aria-labelledby="edit-doctor-<%= doctor._id %>Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                            <h1 class="modal-title fs-5" id="edit-doctor-<%= doctor._id %>Label">Edit Doctor</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="/dashboard/manage/doctor/<%= doctor._id %>?_method=PUT" method="post">
+                              
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Department</label>
+                                <select class="form-select" required name="department" aria-label="Default select example">
+                                  <option selected disabled value="-1">Choose Department</option>
+                                  <% departments.forEach((department) => { %>
+                                    <% if(department._id.equals(doctor.department?.id?._id)) { %>
+                                      <option selected value="<%= department._id %>"><%= department.name %></option>
+                                    <% } else { %>
+                                      <option value="<%= department._id %>"><%= department.name %></option>
+                                    <% } %>
+                                    
+                                  <% }) %>
+                                  
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Picture</label>
+                                <input type="text" name="picture" value="<%= doctor.picture %>" required class="form-control" placeholder="Picture URL">
+                              </div>
+                              <div class="mb-3">
+                                  <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                  <input type="text" name="name" value="<%= doctor.name %>" required class="form-control" placeholder="">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Job Title</label>
+                                <input type="text" name="jobTitle" value="<%= doctor.jobTitle %>" required class="form-control" placeholder="">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Description</label>
+                                <textarea type="text" rows="5" name="description" required class="form-control" placeholder=""><%= doctor.description %></textarea>
+                              </div>
+                                <hr>
+                                <div class="mb-3">
+                                  <label for="exampleFormControlInput1" class="form-label">Experience</label>
+                                  <input type="text" name="experience" value="<%= doctor.experience %>" required class="form-control" placeholder="">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Hourly Rate $</label>
+                                    <input type="number" name="hourlyRate" value="<%= doctor.hourlyRate %>" required class="form-control" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                      <label for="exampleFormControlInput1" class="form-label">English Level</label>
+                                      <input type="text" name="englishLevel" value="<%= doctor.englishLevel %>" required class="form-control" placeholder="">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Availability</label>
+                                    <input type="text" name="availability" value="<%= doctor.availability %>" required class="form-control" placeholder="">
+                                </div>
+                                <hr>
+                                <%
+                                var availableDaysString = '';
+                                doctor.availableDays.forEach((aD, index) => {
+                                  if(index == doctor.availableDays.length - 1) {
+                                    availableDaysString += aD;
+                                  } else {
+                                    availableDaysString += aD + ',';
+                                  }
+                                })
+
+
+                                var availableHoursString = '';
+                                doctor.availableHours.forEach((aH, index) => {
+                                  if(index == doctor.availableHours.length - 1) {
+                                    availableHoursString += aH;
+                                  } else {
+                                    availableHoursString += aH + ',';
+                                  }
+                                })
+
+                                
+                                %>
+                                <div class="mb-3">
+                                  <label for="exampleFormControlInput1" class="form-label">Available Days (Sprate them with Comma , )</label>
+                                  <textarea type="text" rows="3" name="availableDays" required class="form-control" placeholder=""><%= availableDaysString %></textarea>
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Available Hours (Sprate them with Comma , )</label>
+                                <textarea type="text" rows="3" name="availableHours" required class="form-control" placeholder=""><%= availableHoursString %></textarea>
+                            </div>
+                                <button class="btn btn-primary text-white px-5">Save</button>
+                            </form>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+                
+            </div>
+        </div>
+     </div>
+    </div>
+    
+      
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    
+    <!-- partial -->
+  
+  <!-- main-panel ends -->
+</div>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="new-doctor" tabindex="-1" aria-labelledby="new-doctorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h1 class="modal-title fs-5" id="new-doctorLabel">New Doctor</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/dashboard/manage/doctors" method="post">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Department</label>
+              <select class="form-select" required name="department" aria-label="Default select example">
+                <option selected disabled value="-1">Choose Department</option>
+                <% departments.forEach((department) => { %>
+                  <option value="<%= department._id %>"><%= department.name %></option>
+                <% }) %>
+                
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Picture</label>
+              <input type="text" name="picture" required class="form-control" placeholder="Picture URL">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" name="name" required class="form-control" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Job Title</label>
+              <input type="text" name="jobTitle" required class="form-control" placeholder="">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Description</label>
+              <textarea type="text" rows="5" name="description" required class="form-control" placeholder=""></textarea>
+            </div>
+
+            <hr>
+           
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Experience</label>
+          <input type="text" name="experience" required class="form-control" placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Hourly Rate $</label>
+            <input type="number" name="hourlyRate" required class="form-control" placeholder="">
+        </div>
+        <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">English Level</label>
+              <input type="text" name="englishLevel" required class="form-control" placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Availability</label>
+            <input type="text" name="availability" required class="form-control" placeholder="">
+        </div>
+
+        <hr>
+      
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Available Days (Sprate them with Comma , )</label>
+          <textarea type="text" rows="3" name="availableDays" required class="form-control" placeholder=""></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Available Hours (Sprate them with Comma , )</label>
+        <textarea type="text" rows="3" name="availableHours" required class="form-control" placeholder=""></textarea>
+    </div>
+            <button class="btn btn-primary text-white px-5">Add</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<%- include("../partials/dashboard/footer.ejs") %>
+
+
+

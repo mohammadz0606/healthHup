@@ -1,0 +1,142 @@
+
+
+<%- include("../partials/dashboard/header.ejs") %>
+
+
+<!-- partial -->
+<div class="container-fluid page-body-wrapper">
+  <!-- partial:partials/_sidebar.html -->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+      <%-include("../partials/dashboard/navList.ejs") %>
+      
+    </ul>
+  </nav>
+  <!-- partial -->
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="font-weight-bold mb-0">Medicines</h2>
+            <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#new-medicine">Add New Medicine</button>
+          </div>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-between">
+            <p class="lead"><%= medicines.length %> Medicines Found</p>
+            <a href="/dashboard/manage/medicines" class="btn btn-light">
+                <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                  </svg>
+                Reload Medicines
+            </a>
+        </div>
+        <div class="col-12 mt-5">
+            <div class="row">
+                <% medicines.forEach((medicine) => { %>
+                    <div class="col-4 mx-2 bg-light p-4 mt-3" style="border-radius: 15px;">
+                        
+                        <img class="w-100 rounded-3" src="<%= medicine.picture %>" alt="">
+                        <h3 class="h3 mb-0 mt-3"><%= medicine.name %></h3>
+                      
+                        <p class=" mb-0 mt-4"><%= medicine.description %></p>
+
+                        <div class="d-flex align-items-center mt-4">
+                            
+                                <button class="btn btn-warning text-white"  data-bs-toggle="modal" data-bs-target="#edit-medicine-<%= medicine._id %>">Edit</button>
+                            
+                            <form class="mx-4" action="/dashboard/manage/medicine/<%= medicine._id %>?_method=DELETE" method="post">
+                                
+                                <button class="btn btn-danger text-white">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Edit medicine -->
+                    <div class="modal fade" id="edit-medicine-<%= medicine._id %>" tabindex="-1" aria-labelledby="edit-medicine-<%= medicine._id %>Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                            <h1 class="modal-title fs-5" id="edit-medicine-<%= medicine._id %>Label">Edit medicine</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="/dashboard/manage/medicine/<%= medicine._id %>?_method=PUT" method="post">
+                              <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Picture</label>
+                                <input type="text" name="picture" value="<%= medicine.picture %>" required class="form-control" placeholder="Picture URL">
+                            </div>
+                            <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Name</label>
+                              <input type="text" name="name" required value="<%= medicine.name %>" class="form-control" placeholder="">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Description</label>
+                            <textarea type="text" name="description" rows="5" required class="form-control" placeholder=""><%= medicine.description %></textarea>
+                        </div>
+                                
+                                
+                                <button class="btn btn-primary text-white px-5">Save</button>
+                            </form>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+                
+            </div>
+        </div>
+     </div>
+    </div>
+    
+      
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    
+    <!-- partial -->
+  
+  <!-- main-panel ends -->
+</div>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="new-medicine" tabindex="-1" aria-labelledby="new-medicineLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h1 class="modal-title fs-5" id="new-medicineLabel">New Medicine</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/dashboard/manage/medicines" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Picture</label>
+                <input type="text" name="picture" required class="form-control" placeholder="Picture URL">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Name</label>
+              <input type="text" name="name" required class="form-control" placeholder="">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Description</label>
+            <textarea type="text" name="description" rows="5" required class="form-control" placeholder=""></textarea>
+        </div>
+              
+            <button class="btn btn-primary text-white px-5">Add</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<%- include("../partials/dashboard/footer.ejs") %>
+
+
+

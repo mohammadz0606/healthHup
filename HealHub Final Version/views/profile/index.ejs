@@ -1,0 +1,348 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+<style>
+    body {
+        background: linear-gradient(45deg, #2d6fae, #24b4ed, #5567d1) !important;
+        min-height: 100vh;
+    }
+    .emp-profile label {
+        color: #848E9F;
+        font-weight: bold;
+    }
+    .emp-profile .nav-link.active {
+        border: none !important; 
+        background: none !important;
+        color: #24b4ed !important;
+        font-weight: bold !important;
+        font-size: 1.4em;
+        border-bottom: 2px solid #24b4ed !important;
+        font-family: "Roboto Condensed", sans-serif !important;
+    }
+    .emp-profile .nav-link {
+        border: none !important; 
+        background: none !important;
+        color: #ced1d2 !important;
+        font-weight: bold !important;
+        font-size: 1.4em;
+        border-bottom: none !important;
+        font-family: "Roboto Condensed", sans-serif !important;
+    }
+</style>
+
+<div  class="container emp-profile bg-light p-5 " style="border-radius: 20px;">
+        
+    <div class="row">
+        <div class="col-md-6">
+            <div class="profile-head">
+                <div class="d-flex align-items-center mb-5">
+                    <div class="profile-img "> 
+                        <% if(currentUser?.picture?.length == 0) { %>
+                            <div class="d-flex justify-content-end align-items-end" style="width: 100px; height: 100px; background-size: contain; border-radius: 50%; background-image: url('https://res.cloudinary.com/dybct1px0/image/upload/v1715209327/healhub-webiste-images/healhubLogo_kyndda.png');"></div>
+                        <% } else { %>
+                            <div class="d-flex justify-content-end align-items-end" style="width: 100px; height: 100px; background-size: contain; border-radius: 50%; background-image: url('<%= currentUser.picture %>');"></div>
+                        <% } %>
+                       
+                        <form class="Upload-div mt-3" style="width: 100px;" action="/profile/<%= currentUser._id %>" method="post" enctype="multipart/form-data">
+                        <input class="Upload " name="image" type="file">
+                        <button  class="btn mt-3 btn-primary p-0 d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border-radius: 50%;" onclick="document.getElementById('fileInput').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-arrow-up" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708z"/>
+                                <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383m.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                              </svg>
+                        </button>
+                     </from>
+                   </div>
+                   <% if(currentUser.role == 'user') { %>
+                    <h5 class="mx-4 h3" style="text-transform: uppercase">User</h5>
+                   <% } else if(currentUser.role == 'doctor') { %>
+                    <h5 class="mx-4 h3" style="text-transform: uppercase">Doctor</h5>
+                    
+                   <% } %>
+                   
+                </div>
+                
+              
+                
+              
+                <ul class="nav nav-tabs mb-4 border-0" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab"
+                            aria-controls="about" aria-selected="true">About</a>
+                    </li>
+                    <% if(currentUser.role == 'user') { %>
+                        <li class="nav-item">
+                            <a class="nav-link" id="userAppointments-tab" data-toggle="tab" href="#userAppointments" role="tab"
+                                aria-controls="userAppointments" aria-selected="false">Your Appointments</a>
+                        </li>
+                    <% } else if(currentUser.role == 'doctor') { %>
+                        <li class="nav-item">
+                            <a class="nav-link" id="doctorDetail-tab" data-toggle="tab" href="#doctorDetail" role="tab"
+                                aria-controls="doctorDetail" aria-selected="false">Doctor Information</a>
+                        </li>
+                    <% } %>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+   
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+               
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p style="text-transform: capitalize;"><%= currentUser.name %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser.username %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Phone</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser.phoneNumber %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p style="text-transform: capitalize;"><%= currentUser.gender %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Age</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser.age %></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="doctorDetail" role="tabpanel" aria-labelledby="doctorDetail-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Experience</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser?.relatedDoctor?.id?.experience %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Hourly Rate</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser?.relatedDoctor?.id?.hourlyRate %>$/hr</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Total Appointments</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser?.relatedDoctor?.id?.numberOfAppointments %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>English Level</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser?.relatedDoctor?.id?.englishLevel %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Availability</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><%= currentUser?.relatedDoctor?.id?.availability %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Available Days</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <% currentUser?.relatedDoctor?.id?.availableDays.forEach((aD) => { %>
+                                    <%= aD %>
+                                    <br>
+                                <% }) %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Available Hours</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <% currentUser?.relatedDoctor?.id?.availableHours.forEach((aH) => { %>
+                                    <%= aH %>
+                                    <br>
+                                <% }) %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Your detail description</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <%= currentUser?.relatedDoctor?.id?.description %> 
+                            </p>
+                        </div>
+                            
+                        
+                    </div>
+                </div>
+                <% if(currentUser.role == 'user') { %>
+                <div class="tab-pane fade" id="userAppointments" role="tabpanel" aria-labelledby="userAppointments-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead" style="color: #848E9F;"> <%= userAppointments.length %> Appointments Found</p>
+                        </div>
+                       <div class="col-12">
+                        <div class="row">
+                            <% if(userAppointments.length == 0) { %>
+                                <p class="lead">No appointments found yet.</p>
+                            <% } else { %>
+                                <% userAppointments.reverse().forEach((appointment) => { %>
+                                    <div class="col-12 p-4 shadow mb-4" style="border-radius: 20px;">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Status</p>
+                                                <p style="color: #333; font-size: 0.85em; text-transform: uppercase;"><%= appointment.status %></p>
+                                            </div>
+                                            <div class="col-4">
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Department</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.department.id.name %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Doctor</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.doctor.id.name %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Name</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.name %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Email</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.email %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Age</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.age %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Gender</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.gender %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Date</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.date %></p>
+                                            </div>
+                                            <div class="col-4"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Time</p>
+                                                <p style="color: #333; font-size: 0.85em;"><%= appointment.time %></p>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <p class="mb-1" style="font-weight: bold; color: #24b4ed;">Lab Tests</p>
+                                                <div class="d-flex">
+                                                    <% appointment.labTests.forEach((labTest) => { %>
+
+                                                        <span class="rounded-4 px-3 py-1 mx-1 mt-1" style="color: #333; font-size: 0.85em; background-color: #24b4ed; color: #fff; margin-bottom: 0.5em !important;"><%= labTest %></span>
+                                                    <% }) %>
+                                                </div>
+                                                
+                                                
+                                            </div>
+                                            <div class="col-6">
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Medicines</p>
+                                               
+                                                <% if(appointment.medicines.length == 0) { %>
+                                                    <p style="color: #b5b5b5; font-size: 0.85em;">There is no medicines has been added yet</p>
+                                                <% } else { %>
+                                                    <% appointment.medicines.forEach((medicine) => { %>
+                                                        <div class=" py-2 d-flex align-items-center">
+                                                            <img width="40" style="border-radius: 5px;" src="<%= medicine.picture %>" alt="">
+                                                            <p class="mx-2 mb-0" style="color: #333; font-size: 0.85em;"><%= medicine.name %></p>
+
+                                                        </div>
+                                                    <% }) %> 
+                                                    
+                                                <% } %>
+                                            </div>
+                                            <div class="col-6">
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Lab Results</p>
+                                               
+                                                <% if(appointment.labResults.length == 0) { %>
+                                                    <p style="color: #b5b5b5; font-size: 0.85em;">There is no lab Results has been added yet</p>
+                                                <% } else { %> 
+                                                    <p style="color: #333; font-size: 0.85em;"><%= appointment.labResults %></p>  
+                                                <% } %>
+                                            </div>
+                                            <div class="col-6"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Message From Doctor</p>
+                                                <% if(appointment.message.length == 0) { %>
+                                                    <p style="color: #b5b5b5; font-size: 0.85em;">There is no message has been added yet</p>
+                                                <% } else { %>
+                                                    <p style="color: #333; font-size: 0.85em;"><%= appointment.message %></p>
+                                                <% } %>
+                                                
+                                            </div>
+                                            <div class="col-6"> 
+                                                <p style="font-weight: bold; color: #24b4ed; margin-bottom: 0;">Diagnosis From Doctor</p>
+                                                <% if(appointment.diagnosis.length == 0) { %>
+                                                    <p style="color: #b5b5b5; font-size: 0.85em;">There is no diagnosis has been added yet</p>
+                                                <% } else { %>
+                                                    <p style="color: #333; font-size: 0.85em;"><%= appointment.diagnosis %></p>
+                                                <% } %>
+
+
+                                                
+                                            </div>
+                                        </div>
+                                        
+
+                                        
+
+                                    </div>
+                                <% }) %>
+                            <% } %>
+                            
+                            
+                        </div>
+                       </div>
+                    </div>
+                    
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

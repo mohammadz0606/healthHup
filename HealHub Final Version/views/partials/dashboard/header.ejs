@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>HealHub Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="dashthings/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="dashthings/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+ <%- include("./css/style.ejs") %>
+  <!-- endinject -->
+  <link rel="shortcut icon" href="dashthings/images/favicon.png" />
+</head>
+<body>
+  <div class="container">
+    <% if (success && success.length > 0) { %>
+        
+        <div class="alert alert-success d-flex justify-content-between alert-dismissible fade show" style="position: fixed; top: 20px; right: 50px; z-index: 1990;" role="alert">
+            <%= success %>
+            <button type="button" class="close" style="all: unset; cursor: pointer; margin-left: 40px;" data-dismiss="alert" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                  </svg>
+            </button>
+        </div>
+    <% } %>
+    <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger d-flex justify-content-between alert-dismissible fade show" style="position: fixed; top: 20px; right: 50px; z-index: 1990;" role="alert">
+            <%= error %>
+            <button type="button" class="close" style="all: unset; cursor: pointer; margin-left: 40px;" data-dismiss="alert" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                  </svg>
+            </button>
+        </div>
+    <% } %>
+    
+</div>
+  <div class="container-scroller">
+
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a href="index.html" class="navbar-brand brand-logo">
+            <h2 class="brand-logo"><img src="https://res.cloudinary.com/dybct1px0/image/upload/v1715209327/healhub-webiste-images/healhubLogo_kyndda.png" style="width: 50PX; height: 50PX;">HealHub</h2>
+        </a>       
+        
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/img/LOGO/healhubLogo.png" style="width: 50PX; height: 50PX;"></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="ti-view-list"></span>
+        </button>
+        
+        
+       
+      </div>
+    </nav>

@@ -1,0 +1,56 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+
+
+<!-- Blog Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="    max-width: 500px; display: flex;  flex-direction: column; align-items: center;">
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">pharmacy</h5>
+            <h1 class="display-4">Medicines</h1>
+            <div class="input-container">
+                <input class="input" name="text" type="text">
+                <label class="label" for="input">Search For Medicine </label>
+                <div class="topline"></div>
+                <div class="underline"></div>
+                </div>
+        
+        </div>
+    
+        
+        <div class="row g-5 mt-5">
+            <% medicines.forEach((medicine) => { %>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="bg-light rounded overflow-hidden">
+                        <img class="img-fluid w-100" 
+                         src="<%= medicine.picture %>" alt="">
+                        <div class="p-4" >
+                           <a class="h3 d-block mb-3" id="contentToCopy"><%= medicine.name %></a>
+                         
+                            <p class="m-0" style="min-height: 70px;"><%= medicine.description %></p>
+                        </div>
+                  
+                        <!-- <div class="d-flex justify-content-between border-top p-4">
+                           <button class="btn btn-dark">Send to Patient</button>
+                        </div> -->
+                    </div>
+                </div>
+            <% }) %>
+            
+            
+        </div>
+
+
+           
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

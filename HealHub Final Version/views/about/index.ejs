@@ -1,0 +1,109 @@
+<%- include("../partials/head.ejs") %>
+
+<%- include("../partials/navbar.ejs") %>
+
+
+
+
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="https://res.cloudinary.com/dybct1px0/image/upload/v1715212364/healhub-webiste-images/about_nma8v3.jpg" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="mb-4">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
+                    <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
+                </div>
+                <p>
+                    Welcome to our exceptional hospital, where excellence in healthcare meets compassionate service.
+                     At our facility, we prioritize patient well-being above all else, providing top-notch medical care tailored to individual needs.
+                      Our team of highly skilled physicians, nurses, and staff are dedicated to delivering the highest standards of treatment,
+                       ensuring your comfort and safety throughout your journey with us. Trust in us for your medical needs,
+                     and experience the difference firsthand at our esteemed hospital.</p>
+                <div class="row g-3 pt-3">
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
+                            <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
+                            <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
+                            <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4">
+                            <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
+                            <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<!-- Testimonial Start -->
+<div class="container-fluid py-5">
+<div class="container">
+    <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Testimonial</h5>
+        <h1 class="display-4">Patients Say About Our Services</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="owl-carousel testimonial-carousel">
+
+
+                <% reviews.forEach((review) => { %>
+                    
+
+
+                    <div class="testimonial-item text-center mt-5">
+                        <div class="position-relative mb-5">
+                            <% if(review.author.id.picture.length == 0) { %>
+                               
+                                <img class=" rounded-circle mx-auto" width="200" height="200" src=" https://res.cloudinary.com/dybct1px0/image/upload/v1715209327/healhub-webiste-images/healhubLogo_kyndda.png" alt="">
+
+                            <% } else { %>
+                                <img class=" rounded-circle mx-auto" width="200" height="200" src="<%= review.author.id.picture %>" alt="">
+                            <% } %>
+                            <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle" style="width: 60px; height: 60px;">
+                                <i class="fa fa-quote-left fa-2x text-primary"></i>
+                            </div>
+                        </div>
+                        <p class="fs-4 fw-normal"><%= review.comment %></p>
+                        <hr class="w-25 mx-auto">
+                        <h3><%= review.author.id.name %></h3>
+                        <!-- <h6 class="fw-normal text-primary mb-3">Profession</h6> -->
+                    </div>
+                <% }) %>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Testimonial End -->
+
+
+
+<%- include("../partials/footer.ejs") %>
+
+
+<%- include("../partials/foot.ejs") %>

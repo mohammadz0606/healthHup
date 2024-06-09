@@ -1,0 +1,121 @@
+
+
+<%- include("../partials/dashboard/header.ejs") %>
+
+
+<!-- partial -->
+<div class="container-fluid page-body-wrapper">
+  <!-- partial:partials/_sidebar.html -->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+      <%-include("../partials/dashboard/navList.ejs") %>
+      
+    </ul>
+  </nav>
+  <!-- partial -->
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="font-weight-bold mb-0">Departments</h2>
+            <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#new-department">Add New Department</button>
+          </div>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-between">
+            <p class="lead"><%= departments.length %> Departments Found</p>
+            <a href="/dashboard/manage/departments" class="btn btn-light">
+                <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                  </svg>
+                Reload Departments
+            </a>
+        </div>
+        <div class="col-12 mt-5">
+            <div class="row">
+                <% departments.forEach((department) => { %>
+                    <div class="col-4 mx-2 bg-light p-4 mt-3" style="border-radius: 15px;">
+                        <h3 class="h3 mb-0"><%= department.name %></h3>
+                        <div class="d-flex align-items-center mt-4">
+                            
+                                <button class="btn btn-warning text-white"  data-bs-toggle="modal" data-bs-target="#edit-department-<%= department._id %>">Edit</button>
+                            
+                            <form class="mx-4" action="/dashboard/manage/department/<%= department._id %>?_method=DELETE" method="post">
+                                
+                                <button class="btn btn-danger text-white">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Edit Department -->
+                    <div class="modal fade" id="edit-department-<%= department._id %>" tabindex="-1" aria-labelledby="edit-department-<%= department._id %>Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                            <h1 class="modal-title fs-5" id="edit-department-<%= department._id %>Label">Edit Department</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="/dashboard/manage/department/<%= department._id %>?_method=PUT" method="post">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                    <input type="text" name="name" value="<%= department.name %>" required class="form-control" placeholder="">
+                                </div>
+                                
+                                
+                                <button class="btn btn-primary text-white px-5">Save</button>
+                            </form>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+                
+            </div>
+        </div>
+     </div>
+    </div>
+    
+      
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    
+    <!-- partial -->
+  
+  <!-- main-panel ends -->
+</div>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="new-department" tabindex="-1" aria-labelledby="new-departmentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h1 class="modal-title fs-5" id="new-departmentLabel">New Department</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/dashboard/manage/departments" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" name="name" required class="form-control" placeholder="">
+            </div>
+              
+            <button class="btn btn-primary text-white px-5">Add</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<%- include("../partials/dashboard/footer.ejs") %>
+
+
+

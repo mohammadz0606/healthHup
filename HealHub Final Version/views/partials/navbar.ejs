@@ -1,0 +1,77 @@
+ <!-- Navbar Start -->
+ <div class="container-fluid sticky-top bg-white shadow-sm ">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="/" class="navbar-brand">
+                <h1 class="h1-head">  <img class="mx-2" src="https://res.cloudinary.com/dybct1px0/image/upload/v1715209327/healhub-webiste-images/healhubLogo_kyndda.png" style="width: 50px; height: 50px;">HealHub</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/first-aid" class="nav-item nav-link">First Aid</a>
+                    <a href="/about" class="nav-item nav-link">About</a>
+                
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+
+                                <% if(currentUser && currentUser.role == 'doctor' ) { %>
+                                    <a href="/pharmacy" class="dropdown-item">Pharmacy</a>
+                                <% } %>
+
+
+
+                                <% if(currentUser && currentUser.role == 'doctor') { %>
+                                    <a href="/doctor-profile/<%= currentUser._id %>" class="dropdown-item">My Appointments</a>
+                                <% } %>
+
+
+                                <a href="/doctors" class="dropdown-item">Doctors</a>
+
+                                <% if(currentUser && currentUser.role == 'user') { %>
+                                    <a href="/appointment" class="dropdown-item">Appointment</a>
+                                <% } %>
+
+                                <% if(currentUser) { %>
+                                    <a href="/profile/<%= currentUser._id %>" class="dropdown-item">Profile</a>
+                                <% } %>
+                           
+                            
+                        </div>
+                    </div>
+                    <a href="/contact" class="nav-item nav-link ">Contact</a>
+                    
+                    <% if(currentUser) { %>
+                        <form action="/logout" method="post">
+                            <button class="nav-item nav-link">Logout</button>
+                        </form>
+                       
+                        <a href="/profile/<%= currentUser._id %>" class="mt-0 d-flex align-items-center" style="margin-left: 2em; text-decoration: none; color: #354F8E;">
+                            <% if(currentUser.picture.length == 0) { %>
+                                <img width="50" height="50" style="border-radius: 50%;" src="https://res.cloudinary.com/dybct1px0/image/upload/v1715209327/healhub-webiste-images/healhubLogo_kyndda.png" alt="">
+                            <% } else { %>
+                                <img width="50" height="50" style="border-radius: 50%;" src="<%= currentUser.picture %>" alt="">
+                            <% } %>
+                            
+                            <span class="mx-3" style="font-weight: bold; text-transform: uppercase;"><%= currentUser.name %></span>
+                            
+                        </a>
+                        <% if(currentUser.isAdmin) { %>
+                            <div class=" d-flex align-items-center">
+                                <a href="/dashboard" class=" mx-2" style="color: #13C5DD; font-weight: 700; text-decoration: none;">Dashboard</a>
+                            </div>
+                        <% } %>
+                       
+                        
+                    <% } else { %>
+                        <a href="/login" class="nav-item nav-link">Login</a>
+                    <% } %>
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
